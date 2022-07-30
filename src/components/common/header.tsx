@@ -9,6 +9,8 @@ import {
   Grid,
 } from "@mui/material";
 import styles from "./styles/header.module.css";
+import { useWeb3Context } from "../../context";
+import { Web3Button } from "../web3/web3-button";
 
 interface Props {
   lifetimeSeconds: number;
@@ -23,6 +25,7 @@ const Header: FunctionComponent<Props> = ({
   step,
   handleTimer,
 }) => {
+  const { web3Provider } = useWeb3Context();
   const [timer, setTimer] = useState(0);
   const [update, setUpdate] = useState(false);
 
@@ -110,14 +113,16 @@ const Header: FunctionComponent<Props> = ({
               </Typography>
             </Grid>
             {step === "start" && (
-              <Typography variant="subtitle2" color="secondary" noWrap>
-                WELLCOME!
-              </Typography>
+              <Web3Button
+                colorConnect="secondary"
+                colorDisconnect="secondary"
+              />
             )}
             {step === "finished" && (
-              <Typography variant="subtitle2" color="secondary" noWrap>
-                WELL DONE!
-              </Typography>
+              <Web3Button
+                colorConnect="secondary"
+                colorDisconnect="secondary"
+              />
             )}
             {step === "question" && (
               <Typography variant="subtitle2" color="secondary" noWrap>

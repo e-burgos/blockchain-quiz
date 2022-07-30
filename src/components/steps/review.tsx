@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import styles from "./styles/review.module.css";
 import { IQuetionReview } from "../../utils/types";
+import { useWeb3Context } from "../../context";
+import { Web3Button } from "../web3/web3-button";
 
 interface Props {
   image: string;
@@ -18,6 +20,7 @@ interface Props {
 }
 
 const Review: React.FunctionComponent<Props> = ({ image, questionReview }) => {
+  const { web3Provider, network } = useWeb3Context();
   return (
     <Grid className={styles.container}>
       <Grid className={styles.header}>
@@ -49,9 +52,19 @@ const Review: React.FunctionComponent<Props> = ({ image, questionReview }) => {
           ))}
         </List>
       )}
-      <Button variant="contained" sx={{ mt: 3, ml: 1 }}>
-        {"Get reward"}
-      </Button>
+      {!web3Provider ? (
+        <Web3Button />
+      ) : (
+        <>
+          {network?.name === "ropsten" ? (
+            <Button variant="contained">{"Get reward"}</Button>
+          ) : (
+            <Button variant="contained" disabled>
+              {"Please switch to the Ropsten Network to get your reward"}
+            </Button>
+          )}
+        </>
+      )}
     </Grid>
   );
 };

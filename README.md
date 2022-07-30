@@ -1,10 +1,10 @@
-# Next.js with TypeScript example
+# Blockchain Quiz
 
-## How to use
-
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+[Demo](https://blockchain-quiz.vercel.app/):
 
 <!-- #default-branch-switch -->
+
+# Next.js with TypeScript example
 
 ```sh
 curl https://codeload.github.com/mui/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/nextjs-with-typescript
