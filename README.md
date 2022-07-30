@@ -2,6 +2,10 @@
 
 [Demo](https://blockchain-quiz.vercel.app/):
 
+# Tutorials
+
+[Adding Web3 to Our NextJS TypeScript Project](https://betterprogramming.pub/adding-web3-to-our-nextjs-typescript-project-861e9ed5feaf):
+
 <!-- #default-branch-switch -->
 
 # Next.js with TypeScript example
