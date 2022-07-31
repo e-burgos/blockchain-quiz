@@ -1,9 +1,9 @@
-import React from "react";
-import { NextPage } from "next";
-import AppContainer from "../src/components/AppContainer";
+import React from 'react'
+import { NextPage } from 'next'
+import AppContainer from '../components/AppContainer'
 
 const Index: NextPage = () => {
-  return <AppContainer />;
-};
+  return <AppContainer />
+}
 
-export default Index;
+export default Index

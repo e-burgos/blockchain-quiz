@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import Image from 'next/image'
-import Logo from '../../../public/assets/logo.png'
+import Logo from '../../public/assets/logo.png'
 import {
   Toolbar,
   Typography,
