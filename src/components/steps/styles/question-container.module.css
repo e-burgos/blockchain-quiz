@@ -16,7 +16,14 @@
   border-radius: 15px;
 }
 
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 15px;
+}
 .image {
   border-radius: 15px;
-  margin-bottom: 10px;
 }

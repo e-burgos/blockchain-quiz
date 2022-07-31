@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import {
   Grid,
   Typography,
@@ -10,14 +11,14 @@ import {
   FormControl,
   FormControlLabel,
   Radio,
-} from "@mui/material";
-import { IQuetion, IQuetionReview } from "../../utils/types";
-import styles from "./styles/question-container.module.css";
+} from '@mui/material'
+import { IQuetion, IQuetionReview } from '../../utils/types'
+import styles from './styles/question-container.module.css'
 
 interface Props {
-  questions: IQuetion[];
-  index: number;
-  handleQuestionReview: (value: IQuetionReview[]) => void;
+  questions: IQuetion[]
+  index: number
+  handleQuestionReview: (value: IQuetionReview[]) => void
 }
 
 const QuestionContainer: React.FunctionComponent<Props> = ({
@@ -25,41 +26,44 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
   index,
   handleQuestionReview,
 }) => {
-  const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([]);
-  const [selected, setSelected] = useState<string>("");
-  const [clean, setClean] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([])
+  const [selected, setSelected] = useState<string>('')
+  const [clean, setClean] = useState<boolean>(false)
 
   const handleInitialQuestion = () => {
     for (let i = 0; i < questions.length; i++) {
       questionReview.push({
         question: questions[i].text,
         image: questions[i].image,
-        option: "without selection",
-      });
+        option: 'without selection',
+      })
     }
-  };
+  }
 
   const handleQuestion = () => {
-    if (selected !== "") questionReview[index].option = selected;
-  };
+    if (selected !== '') questionReview[index].option = selected
+  }
 
   const handleCleanSelection = () => {
-    setClean(false);
-    setSelected("");
-    questionReview[index].option = "without selection";
-  };
+    setClean(false)
+    setSelected('')
+    questionReview[index].option = 'without selection'
+  }
 
   useEffect(() => {
-    setClean(true);
-    handleQuestionReview(questionReview);
-    if (questionReview.length === 0) handleInitialQuestion();
-    if (questionReview.length === index + 1) handleQuestion();
-  }, [index, questionReview.length]);
+    setClean(true)
+    handleQuestionReview(questionReview)
+    if (questionReview.length === 0) handleInitialQuestion()
+    if (questionReview.length === index + 1) handleQuestion()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, questionReview.length])
 
   useEffect(() => {
-    if (selected) handleQuestion();
-    if (clean) handleCleanSelection();
-  }, [selected, clean]);
+    if (selected) handleQuestion()
+    if (clean) handleCleanSelection()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, clean])
 
   return (
     <Grid className={styles.container}>
@@ -74,12 +78,13 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
         <Typography variant="h5" gutterBottom>
           {questions[index].text}
         </Typography>
-        <Box className={styles.image}>
-          <img
+        <Box className={styles.imageContainer}>
+          <Image
             src={questions[index].image}
-            width={"100%"}
-            alt={questions[index].text}
+            width="250px"
+            height="250px"
             className={styles.image}
+            alt={questions[index].text}
           />
         </Box>
         <FormControl>
@@ -102,7 +107,7 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
         </FormControl>
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default QuestionContainer;
+export default QuestionContainer
