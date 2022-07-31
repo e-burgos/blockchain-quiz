@@ -24,10 +24,9 @@ const providerOptions = {
 let web3Modal: Web3Modal | null;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
-    network: "ropsten", // optional mainnet
+    network: "ropsten", // by default is mainnet
     cacheProvider: true,
     providerOptions, // required
-    theme: "dark",
   });
 }
 

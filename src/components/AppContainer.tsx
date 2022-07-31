@@ -4,22 +4,22 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useData } from "../hooks/getData";
+import { useQuizData } from "../hooks/useQuizData";
 import { IQuetion, IQuetionReview } from "../utils/types";
 import { Paper, Container, Typography } from "@mui/material";
-import Copyright from "./common/copyright";
-import Header from "./common/header";
-import CircularLoading from "./common/circular-loading";
-import ErrorContainer from "./common/error-container";
-import GetStarted from "./steps/get-started";
-import QuestionContainer from "./steps/question-container";
-import Review from "./steps/review";
-import Web3Container from "./web3/web3-container";
+import Copyright from "./common/Copyright";
+import Header from "./common/Header";
+import CircularLoading from "./common/CircularLoading";
+import ErrorContainer from "./common/ErrorContainer";
+import GetStarted from "./steps/GetStarted";
+import QuestionContainer from "./steps/QuestionContainer";
+import Review from "./steps/Review";
+import Web3Container from "./web3/Web3Container";
 import { useWeb3Context } from "../context";
 
 const AppContainer: FunctionComponent = () => {
   const { web3Provider } = useWeb3Context();
-  const { data, error } = useData();
+  const { data, error } = useQuizData();
   const [activeQuestion, setActiveQuestion] = useState<number>(-1);
   const [step, setStep] = useState<string>("start");
   const [index, setIndex] = useState<number>(0);

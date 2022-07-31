@@ -8,7 +8,7 @@ export function Web3Address() {
 
   return (
     <Grid className={styles.container}>
-      <Typography variant="overline">Address</Typography>
+      <Typography variant="overline">Your Address</Typography>
       <Typography variant="overline">{address}</Typography>
     </Grid>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Grid, Typography, Box, Button } from "@mui/material";
 import styles from "./styles/get-started.module.css";
-import { Web3Button } from "../web3/web3-button";
+import { Web3Button } from "../web3/Web3Button";
 import { useWeb3Context } from "../../context";
 
 interface Props {

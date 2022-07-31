@@ -12,7 +12,7 @@ import {
 import styles from "./styles/review.module.css";
 import { IQuetionReview } from "../../utils/types";
 import { useWeb3Context } from "../../context";
-import { Web3Button } from "../web3/web3-button";
+import { Web3Button } from "../web3/Web3Button";
 
 interface Props {
   image: string;

@@ -27,7 +27,7 @@ export function Web3Balance() {
 
   return (
     <Grid className={styles.container}>
-      <Typography variant="overline">Balance</Typography>
+      <Typography variant="overline">Your Balance</Typography>
       <Typography variant="overline">{balance}</Typography>
     </Grid>
   );

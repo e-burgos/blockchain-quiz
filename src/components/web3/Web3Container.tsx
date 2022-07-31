@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Paper } from "@mui/material";
 import styles from "./styles/web3-container.module.css";
-import { Web3Address } from "./web3-address";
-import { Web3Balance } from "./web3-balance";
-import { Web3Network } from "./web3-network";
+import { Web3Address } from "./Web3Address";
+import { Web3Balance } from "./Web3Balance";
+import { Web3Network } from "./Web3Network";
 
 const Web3Container: React.FunctionComponent = () => {
   return (

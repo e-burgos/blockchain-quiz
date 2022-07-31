@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_API_URI } from "../utils/consts";
 import { ISurveyData } from "../utils/types";
 
-export function useData() {
+export function useQuizData() {
   const [data, setData] = useState<ISurveyData>();
   const [error, setError] = useState<boolean>(false);
   const getSurvey = async () => {

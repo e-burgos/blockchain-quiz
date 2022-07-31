@@ -8,7 +8,7 @@ export function Web3Network() {
 
   return (
     <Grid className={styles.container}>
-      <Typography variant="overline">Network</Typography>
+      <Typography variant="overline">Current Network</Typography>
       <Typography variant="overline"> {network?.name}</Typography>
     </Grid>
   );

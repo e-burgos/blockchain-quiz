@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import styles from "./styles/header.module.css";
 import { useWeb3Context } from "../../context";
-import { Web3Button } from "../web3/web3-button";
+import { Web3Button } from "../web3/Web3Button";
 
 interface Props {
   lifetimeSeconds: number;
