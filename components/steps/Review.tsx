@@ -144,9 +144,7 @@ const Review: React.FunctionComponent<Props> = ({
             </>
           ) : (
             <Button variant="contained" disabled>
-              {!error
-                ? "An unexpected error occurred, please try again later, thanks!"
-                : "Please switch to the Ropsten Network to get your reward"}
+              {"Please switch to the Ropsten Network to get your reward"}
             </Button>
           )}
         </>
