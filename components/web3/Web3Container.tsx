@@ -4,6 +4,7 @@ import styles from "./styles/web3-container.module.css";
 import { Web3Address } from "./Web3Address";
 import { Web3Balance } from "./Web3Balance";
 import { Web3Network } from "./Web3Network";
+import { Web3QuizBalance } from "./Web3QuizBalance";
 
 const Web3Container: React.FunctionComponent = () => {
   return (
@@ -11,6 +12,7 @@ const Web3Container: React.FunctionComponent = () => {
       <Web3Address />
       <Web3Network />
       <Web3Balance />
+      <Web3QuizBalance />
     </Paper>
   );
 };

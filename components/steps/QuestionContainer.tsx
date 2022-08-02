@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   Grid,
   Typography,
@@ -11,14 +11,14 @@ import {
   FormControl,
   FormControlLabel,
   Radio,
-} from '@mui/material'
-import { IQuetion, IQuetionReview } from '../../utils/types'
-import styles from './styles/question-container.module.css'
+} from "@mui/material";
+import { IQuetion, IQuetionReview } from "../../utils/types";
+import styles from "./styles/question-container.module.css";
 
 interface Props {
-  questions: IQuetion[]
-  index: number
-  handleQuestionReview: (value: IQuetionReview[]) => void
+  questions: IQuetion[];
+  index: number;
+  handleQuestionReview: (value: IQuetionReview[]) => void;
 }
 
 const QuestionContainer: React.FunctionComponent<Props> = ({
@@ -27,43 +27,44 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
   handleQuestionReview,
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([])
-  const [selected, setSelected] = useState<string>('')
-  const [clean, setClean] = useState<boolean>(false)
+  const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([]);
+  const [selected, setSelected] = useState<string>("");
+  const [clean, setClean] = useState<boolean>(false);
 
   const handleInitialQuestion = () => {
     for (let i = 0; i < questions.length; i++) {
       questionReview.push({
+        answerId: 0,
         question: questions[i].text,
         image: questions[i].image,
-        option: 'without selection',
-      })
+        option: "without selection",
+      });
     }
-  }
+  };
 
   const handleQuestion = () => {
-    if (selected !== '') questionReview[index].option = selected
-  }
+    if (selected !== "") questionReview[index].option = selected;
+  };
 
   const handleCleanSelection = () => {
-    setClean(false)
-    setSelected('')
-    questionReview[index].option = 'without selection'
-  }
+    setClean(false);
+    setSelected("");
+    questionReview[index].option = "without selection";
+  };
 
   useEffect(() => {
-    setClean(true)
-    handleQuestionReview(questionReview)
-    if (questionReview.length === 0) handleInitialQuestion()
-    if (questionReview.length === index + 1) handleQuestion()
+    setClean(true);
+    handleQuestionReview(questionReview);
+    if (questionReview.length === 0) handleInitialQuestion();
+    if (questionReview.length === index + 1) handleQuestion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, questionReview.length])
+  }, [index, questionReview.length]);
 
   useEffect(() => {
-    if (selected) handleQuestion()
-    if (clean) handleCleanSelection()
+    if (selected) handleQuestion();
+    if (clean) handleCleanSelection();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected, clean])
+  }, [selected, clean]);
 
   return (
     <Grid className={styles.container}>
@@ -93,12 +94,15 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
             aria-labelledby="radio-buttons-question-label"
             name="row-radio-buttons-group"
             value={selected}
-            onChange={(e) => setSelected(e.target.value)}
+            onChange={(e) => {
+              setSelected(e.target.value);
+            }}
           >
             {questions[index].options.map((question, i) => (
               <FormControlLabel
                 key={`${question.text}-${i}`}
                 value={question.text}
+                onClick={() => (questionReview[index].answerId = i + 1)}
                 control={<Radio />}
                 label={question.text}
               />
@@ -107,7 +111,7 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
         </FormControl>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default QuestionContainer
+export default QuestionContainer;
