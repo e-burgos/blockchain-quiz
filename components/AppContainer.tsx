@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { useQuizData } from "../hooks/useQuizData";
@@ -28,9 +29,11 @@ const AppContainer: FunctionComponent = () => {
   const [start, setStart] = useState<boolean>(false);
   const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let questions: IQuetion[] = [];
-  if (data) questions = data.questions;
+  const questions = useMemo(() => {
+    let questions: IQuetion[] = [];
+    if (data) questions = data.questions;
+    return questions;
+  }, [data]);
 
   const handleNext = () => {
     if (index >= 0 && index < questions.length) {
@@ -52,13 +55,13 @@ const AppContainer: FunctionComponent = () => {
   useEffect(() => {
     if (questions.length !== 0 && !questions[index]) setIndex(0);
     if (questions.length !== 0 && start) {
-      const autoNextAlert = setTimeout(
+      const autoNextStep = setTimeout(
         () => setIndex(getNextIndex),
         (questions[index].lifetimeSeconds + 2) * 1000
       );
       handleNext();
       return () => {
-        clearTimeout(autoNextAlert);
+        clearTimeout(autoNextStep);
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,7 +79,7 @@ const AppContainer: FunctionComponent = () => {
           lifetimeSeconds={deadLine}
           index={index}
           step={step}
-          handleTimer={setTimer}
+          onTimer={setTimer}
         />
       )}
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>

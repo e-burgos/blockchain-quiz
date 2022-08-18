@@ -1,85 +1,66 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import Image from 'next/image'
-import Logo from '../../public/assets/logo.png'
+import React, { FunctionComponent, useEffect, useState } from "react";
+import Image from "next/image";
+import Logo from "../../public/assets/logo.png";
 import {
   Toolbar,
   Typography,
   AppBar,
   LinearProgress,
   Grid,
-} from '@mui/material'
-import { Web3Button } from '../web3/Web3Button'
-import styles from './styles/header.module.css'
+  Box,
+} from "@mui/material";
+import { Web3Button } from "../web3/Web3Button";
+import styles from "./styles/header.module.css";
 
 interface Props {
-  lifetimeSeconds: number
-  index: number
-  step: string
-  handleTimer: (value: number) => void
+  lifetimeSeconds: number;
+  index: number;
+  step: string;
+  onTimer: (value: number) => void;
 }
 
 const Header: FunctionComponent<Props> = ({
   lifetimeSeconds,
   index,
   step,
-  handleTimer,
+  onTimer,
 }) => {
-  const [timer, setTimer] = useState(0)
-  const [update, setUpdate] = useState(false)
+  const [timer, setTimer] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(-1);
 
-  const getTimeRemaining = (date: Date) => {
-    const total =
-      Date.parse(date.toString()) - Date.parse(new Date().toString())
-    const seconds = Math.floor((total / 1000) % 60)
-    return { total, seconds }
-  }
+  useEffect(() => {
+    onTimer(timer);
+  }, [onTimer, timer]);
 
-  const startTimer = (time: Date) => {
-    const { total, seconds } = getTimeRemaining(time)
-    if (total >= 0) setTimer(seconds)
-  }
-
-  const clearTimer = (time: Date) => {
-    setInterval(() => {
-      startTimer(time)
-    }, 1000)
-  }
-
-  const getDeadTime = (lifetime: number) => {
-    const deadline = new Date()
-    deadline.setSeconds(deadline.getSeconds() + lifetime + 1)
-    return deadline
-  }
+  const countdown = () => {
+    let timer = lifetimeSeconds;
+    const interval: NodeJS.Timer = setInterval(() => {
+      setTimer(timer);
+      timer = timer - 1;
+      if (timer < 0) clearInterval(interval);
+    }, 1000);
+  };
 
   const getPercentage = (lifetime: number) => {
-    let time: number
+    let time: number;
+    if (timer >= lifetime) return 100;
     if (lifetime >= 10) {
-      time = lifetime / 10
-      return (timer * 10) / time
+      time = lifetime / 10;
+      return (timer * 10) / time;
     }
     if (lifetime < 10) {
-      time = lifetime
-      return (timer * 100) / time
+      return (timer / lifetime) * 100;
     }
-  }
+  };
 
   useEffect(() => {
-    if (index !== undefined) setUpdate(true)
-    setTimeout(() => {
-      if (update) setUpdate(false)
-    }, 1000)
+    if (index !== currentIndex) setCurrentIndex(index);
+    if (index === currentIndex) {
+      setTimer(0);
+      countdown();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index])
-
-  useEffect(() => {
-    if (update) clearTimer(getDeadTime(lifetimeSeconds))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lifetimeSeconds, update])
-
-  useEffect(() => {
-    handleTimer(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timer])
+  }, [currentIndex, index, lifetimeSeconds]);
 
   return (
     <>
@@ -88,7 +69,7 @@ const Header: FunctionComponent<Props> = ({
         color="default"
         elevation={0}
         sx={{
-          position: 'relative',
+          position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
@@ -101,9 +82,9 @@ const Header: FunctionComponent<Props> = ({
             width="100%"
           >
             <Grid display="flex" flexDirection="row" alignItems="center">
-              <div className={styles.logo}>
+              <Box className={styles.logo}>
                 <Image className={styles.image} src={Logo} alt="logo" />
-              </div>
+              </Box>
               <Typography
                 className={styles.title}
                 variant="h5"
@@ -113,19 +94,19 @@ const Header: FunctionComponent<Props> = ({
                 WORK @ RATHER LABS
               </Typography>
             </Grid>
-            {step === 'start' && (
+            {step === "start" && (
               <Web3Button
                 colorConnect="secondary"
                 colorDisconnect="secondary"
               />
             )}
-            {step === 'finished' && (
+            {step === "finished" && (
               <Web3Button
                 colorConnect="secondary"
                 colorDisconnect="secondary"
               />
             )}
-            {step === 'question' && (
+            {step === "question" && (
               <Typography variant="subtitle2" color="secondary" noWrap>
                 YOU HAVE {timer} SECONDS
               </Typography>
@@ -135,12 +116,12 @@ const Header: FunctionComponent<Props> = ({
         <LinearProgress
           value={getPercentage(lifetimeSeconds)}
           className={styles.linearProgress}
-          color={'secondary'}
-          variant={'determinate'}
+          color={"secondary"}
+          variant={"determinate"}
         />
       </AppBar>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

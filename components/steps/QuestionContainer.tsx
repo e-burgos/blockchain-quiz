@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import {
   Grid,
@@ -26,10 +26,21 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
   index,
   handleQuestionReview,
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [questionReview, setQuestionReview] = useState<IQuetionReview[]>([]);
   const [selected, setSelected] = useState<string>("");
   const [clean, setClean] = useState<boolean>(false);
+
+  const questionReview = useMemo(() => {
+    const initialData = [];
+    for (let i = 0; i < questions.length; i++) {
+      initialData.push({
+        answerId: 0,
+        question: questions[i].text,
+        image: questions[i].image,
+        option: "without selection",
+      });
+    }
+    return initialData;
+  }, [questions]);
 
   const handleInitialQuestion = () => {
     for (let i = 0; i < questions.length; i++) {
