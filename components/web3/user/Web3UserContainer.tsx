@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Paper } from "@mui/material";
-import styles from "./styles/web3-container.module.css";
 import { Web3Address } from "./Web3Address";
 import { Web3Balance } from "./Web3Balance";
 import { Web3Network } from "./Web3Network";
-import { Web3QuizBalance } from "./Web3QuizBalance";
+import { Web3QuizBalanceOf } from "./Web3QuizBalanceOf";
+import styles from "./styles/web3-user-container.module.css";
 
 const Web3Container: React.FunctionComponent = () => {
   return (
@@ -12,7 +12,7 @@ const Web3Container: React.FunctionComponent = () => {
       <Web3Address />
       <Web3Network />
       <Web3Balance />
-      <Web3QuizBalance />
+      <Web3QuizBalanceOf />
     </Paper>
   );
 };

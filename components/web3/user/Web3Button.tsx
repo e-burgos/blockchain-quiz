@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { useWeb3Context } from "../../context";
+import { useWeb3Context } from "../../../context";
 
 type ButtonColor =
   | "inherit"

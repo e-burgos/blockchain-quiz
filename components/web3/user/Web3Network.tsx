@@ -1,5 +1,5 @@
 import React from "react";
-import { useWeb3Context } from "../../context";
+import { useWeb3Context } from "../../../context";
 import { Grid, Typography } from "@mui/material";
 import styles from "./styles/web3-info.module.css";
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useWeb3Context } from "../../context";
 import { ethers } from "ethers";
 import { NEXT_PUBLIC_CONTRACT_ADDRESS } from "../../utils/consts";
-import quizTokenAbi from "../../contracts/abi.json";
+import quizToken from "../../contracts/Survey.json";
 import {
   Grid,
   Typography,
@@ -15,11 +15,11 @@ import {
   ListItemText,
   Link,
 } from "@mui/material";
-import styles from "./styles/review.module.css";
 import { IQuetionReview } from "../../utils/types";
-import { Web3Button } from "../web3/Web3Button";
+import { Web3Button } from "../web3/user/Web3Button";
 import InfoContainer from "../common/InfoContainer";
 import { useRouter } from "next/router";
+import styles from "./styles/review.module.css";
 
 interface Props {
   image: string;
@@ -49,7 +49,7 @@ const Review: React.FunctionComponent<Props> = ({
   async function handleQuizBalance() {
     if (web3Provider) {
       const signer = web3Provider.getSigner();
-      const contract = new ethers.Contract(quizAddress, quizTokenAbi, signer);
+      const contract = new ethers.Contract(quizAddress, quizToken.abi, signer);
       try {
         const response = await contract.submit(surveyId, handleResults());
         setHash(response?.hash);
@@ -63,7 +63,7 @@ const Review: React.FunctionComponent<Props> = ({
   return (
     <Grid className={styles.container}>
       <Grid className={styles.header}>
-        <Image src={image} width="400px" height="400px" alt="review" />
+        <Image src={image} priority width="400px" height="400px" alt="review" />
         <Typography variant="subtitle1" align="left">
           Thank you for participating in this quiz, for us it is very important
           to know your opinion. Next we will show you the results. To get the
@@ -78,6 +78,7 @@ const Review: React.FunctionComponent<Props> = ({
                 <Avatar>
                   <Image
                     src={question.image}
+                    priority
                     width="100px"
                     height="100px"
                     alt={question.question}

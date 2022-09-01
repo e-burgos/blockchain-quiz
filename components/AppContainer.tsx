@@ -8,15 +8,15 @@ import React, {
 import { useQuizData } from "../hooks/useQuizData";
 import { IQuetion, IQuetionReview } from "../utils/types";
 import { Paper, Container, Typography } from "@mui/material";
-import Copyright from "./common/Copyright";
+import Footer from "./common/Footer";
 import Header from "./common/Header";
 import CircularLoading from "./common/CircularLoading";
 import InfoContainer from "./common/InfoContainer";
-import GetStarted from "./steps/GetStarted";
 import QuestionContainer from "./steps/QuestionContainer";
 import Review from "./steps/Review";
-import Web3Container from "./web3/Web3Container";
+import Web3UserContainer from "./web3/user/Web3UserContainer";
 import { useWeb3Context } from "../context";
+import TabPanel from "./common/TabPanel";
 
 const AppContainer: FunctionComponent = () => {
   const { web3Provider } = useWeb3Context();
@@ -83,7 +83,7 @@ const AppContainer: FunctionComponent = () => {
         />
       )}
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        {web3Provider && step !== "question" && <Web3Container />}
+        {web3Provider && step === "start" && <Web3UserContainer />}
         <Paper
           variant="outlined"
           sx={{
@@ -102,7 +102,7 @@ const AppContainer: FunctionComponent = () => {
               </Typography>
               <>
                 {step === "start" && (
-                  <GetStarted image={data.image} handleStart={setStart} />
+                  <TabPanel data={data} setStart={setStart} />
                 )}
                 {step === "finished" && (
                   <Review
@@ -129,7 +129,7 @@ const AppContainer: FunctionComponent = () => {
           )}
           {!error && !data && <CircularLoading />}
         </Paper>
-        <Copyright />
+        <Footer />
       </Container>
     </>
   );

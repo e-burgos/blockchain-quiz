@@ -9,7 +9,7 @@ import {
   Grid,
   Box,
 } from "@mui/material";
-import { Web3Button } from "../web3/Web3Button";
+import { Web3Button } from "../web3/user/Web3Button";
 import styles from "./styles/header.module.css";
 
 interface Props {
@@ -83,7 +83,12 @@ const Header: FunctionComponent<Props> = ({
           >
             <Grid display="flex" flexDirection="row" alignItems="center">
               <Box className={styles.logo}>
-                <Image className={styles.image} src={Logo} alt="logo" />
+                <Image
+                  className={styles.image}
+                  priority
+                  src={Logo}
+                  alt="logo"
+                />
               </Box>
               <Typography
                 className={styles.title}

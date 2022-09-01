@@ -95,6 +95,7 @@ const QuestionContainer: React.FunctionComponent<Props> = ({
             src={questions[index].image}
             width="250px"
             height="250px"
+            priority
             className={styles.image}
             alt={questions[index].text}
           />

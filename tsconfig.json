@@ -17,5 +17,5 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components"],
-  "exclude": ["node_modules", "blockchain-utils"]
+  "exclude": ["node_modules", "hardhat"]
 }
