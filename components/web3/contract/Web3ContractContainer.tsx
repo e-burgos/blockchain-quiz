@@ -5,10 +5,12 @@ import { Web3QuizSymbol } from "./Web3QuizSymbol";
 import { Web3QuizName } from "./Web3QuizName";
 import { Web3QuizLastSubmittal } from "./Web3QuizLastSubmittal";
 import { Web3QuizCoolDown } from "./Web3QuizCoolDown";
+import { Web3QuizContractAdress } from "./Web3QuizContractAdress";
 
 const Web3ContractContainer: React.FunctionComponent = () => {
   return (
     <div className={styles.container}>
+      <Web3QuizContractAdress />
       <Web3QuizTotalSupply />
       <Web3QuizSymbol />
       <Web3QuizName />

@@ -44,7 +44,7 @@ export function Web3SetCoolDown() {
             className={styles.link}
             color="inherit"
             target="_blank"
-            href={`https://ropsten.etherscan.io/tx/${hash}`}
+            href={`https://goerli.etherscan.io/tx/${hash}`}
           >
             <Button color="inherit" variant="contained">
               {"View Transaction"}

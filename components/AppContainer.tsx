@@ -82,7 +82,7 @@ const AppContainer: FunctionComponent = () => {
           onTimer={setTimer}
         />
       )}
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component="main" maxWidth="sm" sx={{ mb: 8 }}>
         {web3Provider && step === "start" && <Web3UserContainer />}
         <Paper
           variant="outlined"

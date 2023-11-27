@@ -46,6 +46,8 @@ const Review: React.FunctionComponent<Props> = ({
     return results;
   };
 
+  console.log(handleResults());
+
   async function handleQuizBalance() {
     if (web3Provider) {
       const signer = web3Provider.getSigner();
@@ -115,7 +117,7 @@ const Review: React.FunctionComponent<Props> = ({
         <Web3Button />
       ) : (
         <>
-          {network?.name === "ropsten" ? (
+          {network?.name === "goerli" ? (
             <>
               {hash ? (
                 <Grid>
@@ -123,7 +125,7 @@ const Review: React.FunctionComponent<Props> = ({
                     className={styles.link}
                     color="inherit"
                     target="_blank"
-                    href={`https://ropsten.etherscan.io/tx/${hash}`}
+                    href={`https://goerli.etherscan.io/tx/${hash}`}
                   >
                     <Button color="inherit" variant="contained">
                       {"View Transaction"}
@@ -145,7 +147,7 @@ const Review: React.FunctionComponent<Props> = ({
             </>
           ) : (
             <Button variant="contained" disabled>
-              {"Please switch to the Ropsten Network to get your reward"}
+              {"Please switch to the Goerli Network to get your reward"}
             </Button>
           )}
         </>

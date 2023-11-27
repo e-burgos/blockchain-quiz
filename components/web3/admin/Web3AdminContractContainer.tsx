@@ -71,7 +71,7 @@ const Web3AdminContractContainer: React.FunctionComponent = () => {
             className={styles.link}
             color="inherit"
             target="_blank"
-            href={`https://ropsten.etherscan.io/address/${quizAddress}`}
+            href={`https://goerli.etherscan.io/address/${quizAddress}`}
           >
             <Button color="inherit" variant="contained">
               {"View Contract"}

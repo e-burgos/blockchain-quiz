@@ -16,7 +16,8 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
     options: {
-      infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+      infuraId:
+        process.env.NEXT_PUBLIC_INFURA_ID || "49eadc1b401c4cb38e422111e310eced",
     },
   },
 };
@@ -24,7 +25,7 @@ const providerOptions = {
 let web3Modal: Web3Modal | null;
 if (typeof window !== "undefined") {
   web3Modal = new Web3Modal({
-    network: "ropsten", // by default is mainnet
+    network: "goerli", // by default is mainnet
     cacheProvider: true,
     providerOptions, // required
   });
@@ -37,7 +38,7 @@ export const useWeb3 = () => {
   const connect = useCallback(async () => {
     if (web3Modal) {
       try {
-        const provider = await web3Modal.connect();
+        const provider = await web3Modal?.connect();
         const web3Provider = new ethers.providers.Web3Provider(provider);
         const signer = web3Provider.getSigner();
         const address = await signer.getAddress();

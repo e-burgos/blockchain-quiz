@@ -1,7 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
 import { Grid, Typography, Box, Button } from "@mui/material";
-import { Web3Button } from "../web3/user/Web3Button";
 import { useWeb3Context } from "../../context";
 import styles from "./styles/get-started.module.css";
 
@@ -21,22 +20,39 @@ const GetStarted: React.FunctionComponent<Props> = ({ image, handleStart }) => {
         height="300px"
         alt="get started"
       />
-      <Typography variant="subtitle1" align="center">
-        Make sure you are connected to ropsten, if not, tap the metamask button
-        to switch networks automatically.
-      </Typography>
+      {!web3Provider && (
+        <Typography variant="subtitle1" align="center">
+          Welcome, please connect with your wallet to start the survey. If you
+          do not yet have MetaMask installed in your browser, press the DOWNLOAD
+          METAMASK BUTTON, otherwise you will find the CONNECT WALLET connection
+          button to start, thank you for your patience.
+        </Typography>
+      )}
+      {web3Provider && (
+        <>
+          {network?.name === "goerli" && (
+            <Typography variant="subtitle1" align="center">
+              Well done! you are already connected to Goerli Network.
+            </Typography>
+          )}
+          {network?.name !== "goerli" && (
+            <Typography variant="subtitle1" align="center">
+              Make sure you are connected to Goerli Network, if not, tap the
+              metamask button to switch networks automatically.
+            </Typography>
+          )}
+        </>
+      )}
       <Box className={styles.container}>
-        {!web3Provider ? (
-          <Web3Button />
-        ) : (
+        {web3Provider && (
           <>
-            {network?.name === "ropsten" ? (
+            {network?.name === "goerli" ? (
               <Button variant="contained" onClick={() => handleStart(true)}>
                 {"Begin Answering"}
               </Button>
             ) : (
               <Button variant="contained" disabled>
-                {"Please switch to the Ropsten Network to get started"}
+                {"Please switch to the Goerli Network to get started"}
               </Button>
             )}
           </>

@@ -61,10 +61,10 @@ export default function BasicTabs(props: BasicTabsProps) {
               value={value}
               onChange={handleChange}
               aria-label="actions tabs"
-              centered
+              variant="scrollable"
+              scrollButtons
             >
               <Tab label="Get Started" {...a11yProps(0)} />
-
               <Tab label="Quiz Token Info" {...a11yProps(1)} />
               <Tab label="Admin Token" {...a11yProps(2)} />
             </Tabs>
@@ -72,7 +72,6 @@ export default function BasicTabs(props: BasicTabsProps) {
           <TabPanel value={value} index={0}>
             <GetStarted image={data.image} handleStart={setStart} />
           </TabPanel>
-
           <TabPanel value={value} index={1}>
             <Web3ContractContainer />
           </TabPanel>
