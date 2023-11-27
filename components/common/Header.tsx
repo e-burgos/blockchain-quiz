@@ -8,6 +8,7 @@ import {
   LinearProgress,
   Grid,
   Box,
+  Button,
 } from "@mui/material";
 import { Web3Button } from "../web3/user/Web3Button";
 import styles from "./styles/header.module.css";
@@ -27,6 +28,17 @@ const Header: FunctionComponent<Props> = ({
 }) => {
   const [timer, setTimer] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const [metamaskInstalled, setmetaMaskInstalled] = useState<boolean>(false);
+
+  const handleMetamask = () => {
+    if (typeof window.ethereum !== "undefined") {
+      setmetaMaskInstalled(true);
+    } else setmetaMaskInstalled(false);
+  };
+
+  useEffect(() => {
+    handleMetamask();
+  }, []);
 
   useEffect(() => {
     onTimer(timer);
@@ -100,10 +112,33 @@ const Header: FunctionComponent<Props> = ({
               </Typography>
             </Grid>
             {step === "start" && (
-              <Web3Button
-                colorConnect="secondary"
-                colorDisconnect="secondary"
-              />
+              <Grid
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                gap="20px"
+              >
+                {metamaskInstalled && (
+                  <Web3Button
+                    colorConnect="secondary"
+                    colorDisconnect="secondary"
+                  />
+                )}
+                {!metamaskInstalled && (
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() =>
+                      window.open(
+                        "https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
+                        "_blank"
+                      )
+                    }
+                  >
+                    Download Metamask
+                  </Button>
+                )}
+              </Grid>
             )}
             {step === "finished" && (
               <Web3Button
