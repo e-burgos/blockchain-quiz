@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Grid, Typography, Box, Button } from "@mui/material";
 import { useWeb3Context } from "../../context";
 import styles from "./styles/get-started.module.css";
+import SurveyLogo from "../../public/assets/survey-logo.webp";
 
 interface Props {
   handleStart: (value: boolean) => void;
@@ -14,7 +15,7 @@ const GetStarted: React.FunctionComponent<Props> = ({ image, handleStart }) => {
   return (
     <Grid className={styles.container}>
       <Image
-        src={image}
+        src={image || SurveyLogo}
         priority
         width="300px"
         height="300px"
